@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Please sign in</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="/css/userInfoStyle.css">
+    <header class="container-fluid d-flex flex-row align-items-center justify-content-between p-3 bg-dark text-white">
+        <div><b th:text="${user.getEmail()}"/> with roles:
+                <span th:text="${user.getAuthorities()}"/>
+            </div>
+        <div><a class="text-light" th:href="@{/logout}">Logout</a></div>
+    </header>
+
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-2 nopadding">
+            <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                <button  class="btn btn-primary zxc" type="button" onClick='location.href="http://localhost:8080/admin/getAll"'>Admin</button>
+            </div>
+            <button class="btn btn-primary zxc" type="button" onClick='location.href="http://localhost:8080/user"'>User</button>
+        </div>
+        <div class="col-10">
+        <h1>User information-page</h1>
+            <br>
+            <table class="table table-striped caption">
+                <caption class="caption1 " style="caption-side:top">
+                    <div style="margin-left: 20px">About user</div>
+                </caption>
+
+                <tread>
+                    <tr></tr>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </tread>
+                <tr>
+                    <form>
+                        <td><span th:text="${user.getId()}"> Username </span></td>
+                        <td><span th:text="${user.getName()}"> Name </span></td>
+                        <td><span th:text="${user.getSurname()}"> Surname </span></td>
+                        <td><span th:text="${user.getAge()}"> Age </span></td>
+                        <td><span th:text="${user.getEmail()}"> Email </span></td>
+                        <td><span th:text="${user.getAuthorities()}"> Role </span></td>
+                    </form>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<style>
+    .block {
+        position: sticky;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.77);
+        color: #fff;
+        padding: 15px;
+
+
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        height:100px;
+
+    }
+
+    .title1 {
+        top: 0;
+        padding: 4px;
+        color: white;
+        text-align: left;
+    }
+
+    .title2 {
+        top: 0;
+        padding: 4px;
+        color: grey;
+        text-align: right;
+    }
+    .zxc{
+        display: block;
+        width: 100%;
+        border: none;
+        background-color: dodgerblue;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: left;
+        margin-top:10px;
+
+    }
+    .nopadding {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .col-2{
+        background-color: white;
+        flex: 0 0 240px;
+        min-height: 100%;
+
+    }
+    .caption1{
+        font-size: x-large;
+        color: black;
+        background-color: rgba(85,85,85,0.13);
+        /*border: 1px solid #eeeeee;*/
+    }
+    .table {
+        position: sticky;
+        padding: 5px;
+    }
+
+    table:before {
+        display: block;
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        border: 1px solid grey;
+        border-radius: 5px;
+    }
+    hr {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    .row{
+        min-height: 100vh;
+    }
+
+</style>
+</body>
+
+</html>
