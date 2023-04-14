@@ -1,7 +1,9 @@
 package com.example.bssecurity_3_1_4.service;
 
 
+import com.example.bssecurity_3_1_4.model.Role;
 import com.example.bssecurity_3_1_4.model.User;
+import com.example.bssecurity_3_1_4.repository.RoleRepository;
 import com.example.bssecurity_3_1_4.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,10 +19,12 @@ import java.util.Optional;
 public class UserServiceImpl implements UserDetailsService,UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Transactional(readOnly = true)
@@ -43,13 +47,14 @@ public class UserServiceImpl implements UserDetailsService,UserService {
 
     @Override
     public void addUser(User user) {
-//        user.setUsername("");
+        user.setUsername(user.getEmail());
         userRepository.save(user);
     }
 
     @Override
     public void edit(User user) {
-         userRepository.saveAndFlush(user);
+//        user.setUsername(user.getEmail());
+        userRepository.saveAndFlush(user);
     }
 
     @Override
@@ -65,6 +70,11 @@ public class UserServiceImpl implements UserDetailsService,UserService {
     @Override
     public Optional<User> findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public Iterable<Role> getAllRoles(){
+        return roleRepository.findAll();
     }
 
 }

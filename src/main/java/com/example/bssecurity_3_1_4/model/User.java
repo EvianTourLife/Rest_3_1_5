@@ -38,8 +38,8 @@ public class User implements UserDetails {
     @Size(message = "Строка не должна быть пустой")
     private String password;
     @Column(name = "username")
-    @NotEmpty(message = "Строка не должна быть пустой")
-    @Size(message = "Строка не должна быть пустой")
+//    @NotEmpty(message = "Строка не должна быть пустой")
+//    @Size(message = "Строка не должна быть пустой")
     private String username;
 
     @Column(name = "email")

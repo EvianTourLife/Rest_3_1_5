@@ -1,6 +1,7 @@
 package com.example.bssecurity_3_1_4.service;
 
 
+import com.example.bssecurity_3_1_4.model.Role;
 import com.example.bssecurity_3_1_4.model.User;
 
 import java.util.List;
@@ -20,4 +21,7 @@ public interface UserService {
     void delete(Long id);
 
     Optional<User> findByUsername(String username);
+
+    Iterable<Role> getAllRoles();
+
 }

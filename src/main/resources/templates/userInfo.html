@@ -14,8 +14,8 @@
     <link rel="stylesheet" type="text/css" href="/css/userInfoStyle.css">
     <header class="container-fluid d-flex flex-row align-items-center justify-content-between p-3 bg-dark text-white">
         <div><b th:text="${user.getEmail()}"/> with roles:
-                <span th:text="${user.getAuthorities()}"/>
-            </div>
+            <span th:text="${user.getAuthorities()}"/>
+        </div>
         <div><a class="text-light" th:href="@{/logout}">Logout</a></div>
     </header>
 
@@ -24,15 +24,19 @@
 <body>
 
 <div class="container-fluid">
-    <div class="row" >
+    <div class="row">
         <div class="col-2 nopadding">
             <div sec:authorize="hasAuthority('ROLE_ADMIN')">
-                <button  class="btn btn-primary zxc" type="button" onClick='location.href="http://localhost:8080/admin/getAll"'>Admin</button>
+                <button class="btn btn-primary zxc" type="button"
+                        onClick='location.href="http://localhost:8080/admin/getAll"'>Admin
+                </button>
             </div>
-            <button class="btn btn-primary zxc" type="button" onClick='location.href="http://localhost:8080/user"'>User</button>
+            <button class="btn btn-primary zxc" type="button" onClick='location.href="http://localhost:8080/user"'>
+                User
+            </button>
         </div>
         <div class="col-10">
-        <h1>User information-page</h1>
+            <h1>User information-page</h1>
             <br>
             <table class="table table-striped caption">
                 <caption class="caption1 " style="caption-side:top">
@@ -78,7 +82,7 @@
     html, body {
         margin: 0;
         padding: 0;
-        height:100px;
+        height: 100px;
 
     }
 
@@ -95,7 +99,8 @@
         color: grey;
         text-align: right;
     }
-    .zxc{
+
+    .zxc {
         display: block;
         width: 100%;
         border: none;
@@ -104,25 +109,29 @@
         font-size: 16px;
         cursor: pointer;
         text-align: left;
-        margin-top:10px;
+        margin-top: 10px;
 
     }
+
     .nopadding {
         padding: 0 !important;
         margin: 0 !important;
     }
-    .col-2{
+
+    .col-2 {
         background-color: white;
         flex: 0 0 240px;
         min-height: 100%;
 
     }
-    .caption1{
+
+    .caption1 {
         font-size: x-large;
         color: black;
-        background-color: rgba(85,85,85,0.13);
+        background-color: rgba(85, 85, 85, 0.13);
         /*border: 1px solid #eeeeee;*/
     }
+
     .table {
         position: sticky;
         padding: 5px;
@@ -139,13 +148,15 @@
         border: 1px solid grey;
         border-radius: 5px;
     }
+
     hr {
         margin-top: 1rem;
         margin-bottom: 1rem;
         border: 0;
         border-top: 1px solid rgba(0, 0, 0, 0.1);
     }
-    .row{
+
+    .row {
         min-height: 100vh;
     }
 

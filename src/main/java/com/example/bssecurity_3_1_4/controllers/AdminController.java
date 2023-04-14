@@ -27,6 +27,11 @@ public class AdminController {
     public String show(Model model, Principal principal) {
         model.addAttribute("user", service.findByUsername(
                 principal.getName()).get());
+        model.addAttribute("allRoles", service.getAllRoles());
+
+
+//        model.addAttribute("user1", service.findByUsername(
+//                principal.getName()).get());
         model.addAttribute("users", service.getAll());
         return "/index";
     }
