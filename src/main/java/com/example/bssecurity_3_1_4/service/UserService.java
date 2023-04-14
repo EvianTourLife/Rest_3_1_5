@@ -22,6 +22,6 @@ public interface UserService {
 
     Optional<User> findByUsername(String username);
 
-    Iterable<Role> getAllRoles();
+    List<Role> getAllRoles();
 
 }

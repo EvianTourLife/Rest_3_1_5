@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserDetailsService,UserService {
     }
 
     @Override
-    public Iterable<Role> getAllRoles(){
+    public List<Role> getAllRoles(){
         return roleRepository.findAll();
     }
 

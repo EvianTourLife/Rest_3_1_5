@@ -18,15 +18,17 @@ import java.security.Principal;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final UserService service;
+    private final UserServiceImpl service;
 
     public AdminController(UserServiceImpl service) {
         this.service = service;
     }
     @GetMapping("/getAll")
     public String show(Model model, Principal principal) {
-        model.addAttribute("user", service.findByUsername(
-                principal.getName()).get());
+        User user = (User) service.loadUserByUsername(principal.getName());
+//        model.addAttribute("user", service.findByUsername(
+//                principal.getName()).get());
+        model.addAttribute("user", service.getById(user.getId()));
         model.addAttribute("allRoles", service.getAllRoles());
 
 
@@ -41,10 +43,10 @@ public class AdminController {
 //        model.addAttribute("users", service.getAll());
 //        return "/index";
 //    }
-    @GetMapping("/add")
-    public String addUser(@ModelAttribute("user") User user) {
-        return "add";
-    }
+//    @GetMapping("/add")
+//    public String addUser(@ModelAttribute("user") User user) {
+//        return "add";
+//    }
 
     @PostMapping()
     public String createUser(@ModelAttribute("user") @Valid User user,  BindingResult bindingResult) {
@@ -55,13 +57,13 @@ public class AdminController {
         return "redirect:/admin/getAll";
     }
 
-    @GetMapping("/edit")
-    public String editUser(Model model, @RequestParam(value = "id", required = false) Long id) {
-        model.addAttribute("user", service.getById(id));
-        return "edit";
-    }
+//    @GetMapping("/edit")
+//    public String editUser(Model model, @RequestParam(value = "id", required = false) Long id) {
+//        model.addAttribute("user", service.getById(id));
+//        return "edit";
+//    }
 
-    @PostMapping("/edit")
+    @PostMapping("/edit/{id}")
     public String update(@ModelAttribute("user") User user) {
         service.edit(user);
         return "redirect:/admin/getAll";
@@ -72,5 +74,6 @@ public class AdminController {
         service.delete(id);
         return "redirect:/admin/getAll";
     }
+
 
 }
