@@ -29,7 +29,7 @@ public class User implements UserDetails {
     @Column(name = "last_name")
     private String surname;
 
-    @Min(value = 0, message = "минимум 0")
+//    @Min(value = 0, message = "минимум 0")
     @Column(name = "age")
     private Integer age;
 
@@ -38,8 +38,6 @@ public class User implements UserDetails {
     @Size(message = "Строка не должна быть пустой")
     private String password;
     @Column(name = "username")
-//    @NotEmpty(message = "Строка не должна быть пустой")
-//    @Size(message = "Строка не должна быть пустой")
     private String username;
 
     @Column(name = "email")
@@ -144,6 +142,15 @@ public class User implements UserDetails {
             authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
         }
         return authorities;
+    }
+
+    public String getAllRolesAsString() {
+        StringBuilder finishedString = new StringBuilder();
+        for (Role role : roles) {
+            finishedString.append(role.getRole()).append(", ");
+        }
+
+        return finishedString.substring(0, finishedString.length() - 2);
     }
 
     @Override

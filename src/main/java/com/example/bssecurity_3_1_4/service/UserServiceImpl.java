@@ -5,7 +5,6 @@ import com.example.bssecurity_3_1_4.model.Role;
 import com.example.bssecurity_3_1_4.model.User;
 import com.example.bssecurity_3_1_4.repository.RoleRepository;
 import com.example.bssecurity_3_1_4.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -34,8 +33,7 @@ public class UserServiceImpl implements UserDetailsService,UserService {
         if (user.isEmpty()) {
             throw new UsernameNotFoundException("user не существует");
         }
-//        return new org.springframework.security.core.userdetails.User(user.get().getUsername(),
-//                user.get().getPassword(),user.get().getAuthorities());
+
         return user.get();
     }
 
@@ -53,7 +51,7 @@ public class UserServiceImpl implements UserDetailsService,UserService {
 
     @Override
     public void edit(User user) {
-//        user.setUsername(user.getEmail());
+        user.setUsername(user.getEmail());
         userRepository.saveAndFlush(user);
     }
 
