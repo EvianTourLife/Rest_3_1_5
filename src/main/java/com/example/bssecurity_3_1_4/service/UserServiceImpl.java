@@ -5,9 +5,11 @@ import com.example.bssecurity_3_1_4.model.Role;
 import com.example.bssecurity_3_1_4.model.User;
 import com.example.bssecurity_3_1_4.repository.RoleRepository;
 import com.example.bssecurity_3_1_4.repository.UserRepository;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,11 +21,13 @@ public class UserServiceImpl implements UserDetailsService,UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,@Lazy PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional(readOnly = true)
@@ -45,6 +49,7 @@ public class UserServiceImpl implements UserDetailsService,UserService {
 
     @Override
     public void addUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setUsername(user.getEmail());
         userRepository.save(user);
     }

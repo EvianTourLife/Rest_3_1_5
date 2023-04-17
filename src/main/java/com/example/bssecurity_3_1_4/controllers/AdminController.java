@@ -19,7 +19,7 @@ public class AdminController {
         this.service = service;
     }
     @GetMapping("/getAll")
-    public String show(Model model, Principal principal) {
+    public String getAttributesForAdminPanel(Model model, Principal principal) {
         User user = (User) service.loadUserByUsername(principal.getName());
         model.addAttribute("user", service.getById(user.getId()));
         model.addAttribute("allRoles", service.getAllRoles());
