@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserDetailsService,UserService {
+public class UserServiceImpl implements UserDetailsService, UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
 
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,@Lazy PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, @Lazy PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
@@ -55,9 +55,15 @@ public class UserServiceImpl implements UserDetailsService,UserService {
     }
 
     @Override
-    public void edit(User user) {
-        user.setUsername(user.getEmail());
-        userRepository.saveAndFlush(user);
+    public void edit(User updatedUser) {
+        User user = userRepository.getById(updatedUser.getId());
+        if (!updatedUser.getPassword().equals(user.getPassword())){
+            updatedUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+
+        updatedUser.setUsername(updatedUser.getEmail());
+        userRepository.save(updatedUser);
+
     }
 
     @Override
@@ -67,7 +73,7 @@ public class UserServiceImpl implements UserDetailsService,UserService {
 
     @Override
     public void delete(Long id) {
-         userRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     @Override
@@ -76,8 +82,9 @@ public class UserServiceImpl implements UserDetailsService,UserService {
     }
 
     @Override
-    public List<Role> getAllRoles(){
+    public List<Role> getAllRoles() {
         return roleRepository.findAll();
     }
+
 
 }

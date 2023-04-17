@@ -2,12 +2,12 @@ package com.example.bssecurity_3_1_4.controllers;
 
 import com.example.bssecurity_3_1_4.model.User;
 import com.example.bssecurity_3_1_4.service.UserServiceImpl;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/admin")
@@ -19,9 +19,8 @@ public class AdminController {
         this.service = service;
     }
     @GetMapping("/getAll")
-    public String getAttributesForAdminPanel(Model model, Principal principal) {
-        User user = (User) service.loadUserByUsername(principal.getName());
-        model.addAttribute("user", service.getById(user.getId()));
+    public String getAdminPage(Model model, @AuthenticationPrincipal User user) {
+        model.addAttribute("user", user);
         model.addAttribute("allRoles", service.getAllRoles());
         model.addAttribute("users", service.getAll());
         return "/index";

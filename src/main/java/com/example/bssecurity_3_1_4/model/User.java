@@ -2,10 +2,10 @@ package com.example.bssecurity_3_1_4.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,7 +29,7 @@ public class User implements UserDetails {
     @Column(name = "last_name")
     private String surname;
 
-//    @Min(value = 0, message = "минимум 0")
+    //    @Min(value = 0, message = "минимум 0")
     @Column(name = "age")
     private Integer age;
 
