@@ -151,6 +151,7 @@ public class User implements UserDetails {
         }
 
         return finishedString.substring(0, finishedString.length() - 2);
+//        return finishedString.substring(0,finishedString.length());
     }
 
     @Override

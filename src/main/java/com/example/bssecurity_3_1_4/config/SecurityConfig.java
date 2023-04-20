@@ -28,26 +28,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
 
-//        http.formLogin()
-//                .loginPage("/login")
-//                .loginProcessingUrl("/login")
-////                .successHandler(successUserHandler)
-//                .permitAll();
-//
-//        http.logout()
-//                .permitAll()
-//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                .logoutSuccessUrl("/login?logout")
-//                .and().csrf().disable();
+        http.formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .successHandler(successUserHandler)
+                .permitAll();
+
+        http.logout()
+                .permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .and().csrf().disable();
 
         http
+//                .httpBasic().and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
-//                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
-//                .antMatchers("/admin/**").hasRole("ADMIN")
-//                .anyRequest().authenticated();
-                .anyRequest().anonymous();
+//                .antMatchers("/**").permitAll()
+                .antMatchers("/user").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .anyRequest().authenticated();
+//                .anyRequest().anonymous();
 
     }
 
@@ -58,16 +59,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         managerBuilder.authenticationProvider(provider());
     }
 
-//    @Bean
-//    public PasswordEncoder getPasswordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public PasswordEncoder getPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public DaoAuthenticationProvider provider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userService);
-//        provider.setPasswordEncoder(getPasswordEncoder());
+        provider.setPasswordEncoder(getPasswordEncoder());
         return provider;
     }
 }
