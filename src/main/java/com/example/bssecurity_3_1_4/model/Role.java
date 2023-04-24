@@ -51,8 +51,6 @@ public class Role implements GrantedAuthority {
     public String getAuthority() {
         return ROLE_PREFIX+role;
     }
-    public String getAuthorityWithoutPrefix(){
-        return role;
-    }
+
 
 }

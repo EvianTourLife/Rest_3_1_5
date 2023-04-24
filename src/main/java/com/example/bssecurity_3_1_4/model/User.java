@@ -144,15 +144,6 @@ public class User implements UserDetails {
         return authorities;
     }
 
-    public String getAllRolesAsString() {
-        StringBuilder finishedString = new StringBuilder();
-        for (Role role : roles) {
-            finishedString.append(role.getRole()).append(", ");
-        }
-
-        return finishedString.substring(0, finishedString.length() - 2);
-//        return finishedString.substring(0,finishedString.length());
-    }
 
     @Override
     public String getPassword() {

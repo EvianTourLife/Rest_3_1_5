@@ -1,9 +1,9 @@
 package com.example.bssecurity_3_1_4.controllers;
 
+import com.example.bssecurity_3_1_4.model.Role;
 import com.example.bssecurity_3_1_4.model.User;
 import com.example.bssecurity_3_1_4.service.UserServiceImpl;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,15 +22,13 @@ public class Rest {
     public List<User> getAdminPage() {
         return service.getAll();
     }
-//    @GetMapping("/users")
-//    public ResponseEntity<List<User>> apiGetAllUsers() {
-//        List<User> users = service.getAll();
-//        return new ResponseEntity<>(users, HttpStatus.OK);
-//    }
-
     @GetMapping("/{id}")
     public User getUserInfo(@PathVariable Long id) {
         return service.getById(id);
+    }
+    @GetMapping("/getOneUser")
+    public User getUserInfo(@AuthenticationPrincipal User user) {
+        return user;
     }
 
     @PostMapping("/users")
@@ -39,16 +37,21 @@ public class Rest {
         return user;
     }
 
-    @PatchMapping("/users")
+    @PatchMapping("/users/{id}")
     public User update(@RequestBody User user) {
         service.edit(user);
         return user;
     }
-
 
     @DeleteMapping("/users/{id}")
     public String delete(@PathVariable Long id) {
         service.delete(id);
         return "User with id " + id + " was deleted";
     }
+
+    @GetMapping("/roles")
+    public List<Role> getAllRoles() {
+        return service.getAllRoles();
+    }
+
 }
