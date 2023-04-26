@@ -3,7 +3,6 @@ package com.example.bssecurity_3_1_4.controllers;
 import com.example.bssecurity_3_1_4.model.User;
 import com.example.bssecurity_3_1_4.service.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
