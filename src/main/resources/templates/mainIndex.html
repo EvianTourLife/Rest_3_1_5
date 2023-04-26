@@ -16,9 +16,9 @@
 
                     <div class="collapse navbar-collapse" id="user">
                         <ul class="navbar-nav mr-auto">
-                            <a class="navbar-brand font-weight-bold" id="headerEmail"></a>
+                            <a class="navbar-brand font-weight-bold" id="headerEmail" th:text="${#authentication.name}"></a>
                             <a class="navbar-brand">with roles:</a>
-                            <a class="navbar-brand" id="headerRoles"></a>
+                            <a class="navbar-brand" id="headerRoles" th:text="${#authentication.authorities}"></a>
                         </ul>
                         <ul class="navbar-nav">
                             <li class="nav-item">

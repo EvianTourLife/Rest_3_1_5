@@ -144,7 +144,6 @@ public class User implements UserDetails {
         return authorities;
     }
 
-
     @Override
     public String getPassword() {
         return password;
@@ -174,5 +173,8 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+
 
 }

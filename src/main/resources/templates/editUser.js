@@ -15,7 +15,7 @@ function editUser() {
             })
         }
 
-        fetch("http://localhost:8080/api/users/" + editForm.id.value, {
+        fetch("http://localhost:8080/api/admin/user/" + editForm.id.value, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ function editUser() {
 }
 
 async function getUser(id) {
-    let url = "http://localhost:8080/api/" + id;
+    let url = "http://localhost:8080/api/user/" + id;
     let response = await fetch(url);
     return await response.json();
 
@@ -62,7 +62,7 @@ async function showEditModal(id) {
     form.password.value = user.password;
 
 
-    await fetch("http://localhost:8080/api/roles")
+    await fetch("http://localhost:8080/api/roles/getAll")
         .then(res => res.json())
         .then(roles => {
             roles.forEach(role => {

@@ -6,7 +6,7 @@ function deleteUser(){
     const deleteForm = document.forms["formDeleteUser"];
     deleteForm.addEventListener("submit", ev => {
         ev.preventDefault();
-        fetch("http://localhost:8080/api/users/" + deleteForm.id.value, {
+        fetch("http://localhost:8080/api/admin/user/" + deleteForm.id.value, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ function deleteUser(){
     })
 }
 async function getUser(id) {
-    let url = "http://localhost:8080/api/" + id;
+    let url = "http://localhost:8080/api/user/" + id;
     let response = await fetch(url);
     return await response.json();
 }
@@ -48,7 +48,7 @@ async function showDeleteModal(id) {
     form.roles.value = newUserRoles;
 
 
-    await fetch("http://localhost:8080/api/roles")
+    await fetch("http://localhost:8080/api/roles/getAll")
         .then(res => res.json())
         .then(roles => {
             roles.forEach(role => {
