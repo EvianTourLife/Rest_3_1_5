@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api/admin/users")
 public class AdminRestController {
 
 
@@ -19,27 +19,27 @@ public class AdminRestController {
     }
 
 
-    @GetMapping("/users")
+    @GetMapping()
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(service.getAll());
     }
 
 
-    @PostMapping("/user")
+    @PostMapping()
     public ResponseEntity<User> createUser(@RequestBody User user) {
         service.addUser(user);
         return ResponseEntity.ok(user);
     }
 
 
-    @PatchMapping("/user/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
         service.edit(user);
         return ResponseEntity.ok(user);
     }
 
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.ok("User with id " + id + " was deleted");

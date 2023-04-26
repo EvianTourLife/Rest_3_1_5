@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RestController
-@RequestMapping("/api/roles")
+@RequestMapping("/api/admin/roles")
 public class AdminRoleRestController {
 
     private final UserServiceImpl service;
@@ -16,7 +16,7 @@ public class AdminRoleRestController {
     public AdminRoleRestController(UserServiceImpl service) {
         this.service = service;
     }
-    @GetMapping("/getAll")
+    @GetMapping()
     public List<Role> getAllRoles() {
         return service.getAllRoles();
     }
