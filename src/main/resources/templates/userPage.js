@@ -17,22 +17,3 @@ async function thisUser() {
             $('#userPanelBody').append(user);
         })
 }
-$(async function() {
-    await thisAdmin();
-});
-async function thisAdmin() {
-
-    fetch("http://localhost:8080/api/user/getAuthorizedUser")
-        .then(res => res.json())
-        .then(data => {
-            let user = `$(
-            <tr>
-                <td>${data.id}</td>
-                <td>${data.name}</td>
-                <td>${data.surname}</td>
-                <td>${data.age}</td>
-                <td>${data.email}</td>
-                <td>${data.roles.map(role => " " + role.role)}</td>)`;
-            $('#adminPanelBody').append(user);
-        })
-}

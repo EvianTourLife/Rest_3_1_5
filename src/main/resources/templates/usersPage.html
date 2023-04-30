@@ -21,7 +21,8 @@
                     <div class="collapse navbar-collapse" id="user">
                         <ul class="navbar-nav mr-auto">
 <!--                            <a class="navbar-brand font-weight-bold" id="headerEmail" th:text="${#authentication.name}"></a>-->
-                            <a class="navbar-brand font-weight-bold" id="headerEmail" sec:authentication="principal.username"></a>
+                            <a class="navbar-brand font-weight-bold" id="headerEmail"
+                               sec:authentication="principal.username"></a>
                             <a class="navbar-brand">with roles:</a>
 <!--                            <a class="navbar-brand" id="headerRoles" th:text="${#authentication.authorities}"></a>-->
                             <a class="navbar-brand" sec:authentication="principal.authorities" id="headerRoles"></a>
